@@ -21,20 +21,26 @@
 </head>
 <body>
 
-	Coding is <div id="magic"></div>
+	Coding is&nbsp;<div id="magic"></div>
 
 	<script>
 
-		var words = ["fun", "exciting", "about not giving up", "being helpful", "being open", "what I learned at CodingDojo!"],
+		var words = ["fun", "exciting", "about not giving up", "being helpful", "being open", "what I learned at CodingDojo!", "something I enjoy doing - Ray"],
 			el = document.getElementById('magic'),
 			word_counter = 0,
 			character_counter = 0;
 
 		function updateText()
 		{
-			el.innerHTML = el.innerHTML+words[word_counter][character_counter++];
+			if(words[word_counter][character_counter] ==  " ") {
+				el.innerHTML = el.innerHTML + "&nbsp;";
+				character_counter++;
+			}
+			else {
+				el.innerHTML = el.innerHTML+words[word_counter][character_counter++];
+			}
 
-			if(character_counter == words[word_counter].length)
+			if(character_counter == words[word_counter].length + 1)
 			{
 				word_counter++; 	//choose a different word
 				character_counter = 0;	//start over with the first character of the word
@@ -44,9 +50,24 @@
 				if(word_counter == words.length)
 					word_counter = 0;
 			}
+
+			
+		}
+
+		// Extra feature added to change text colors based on set interval
+		function changeTextColor()
+		{
+			if(document.querySelector("#magic").style.color == "rgb(119, 119, 119)") {
+				document.querySelector("#magic").style.color = "rgb(250, 250, 50)";
+			}
+			else {
+				document.querySelector("#magic").style.color = "rgb(119, 119, 119)";
+			}
+			// console.log(document.querySelector("#magic").style.color);
 		}
 
 		setInterval(updateText,300);
+		setInterval(changeTextColor,200);
 
 	</script>
 
